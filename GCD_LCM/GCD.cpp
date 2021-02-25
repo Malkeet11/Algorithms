@@ -19,10 +19,11 @@ int gcd_stl(int a, int b)
 
 int gcd_1(int a, int b)
 {
-    if(b == 0)
+    if(!b)
         return a;
     return gcd_1(b, a % b);
 }
+
 
 int gcd_2(int a, int b)
 {
@@ -84,21 +85,39 @@ int gcd_3(int a, int b)
     return ans;
 }
 
+int gcd_urs(int a, int b)
+{
+    if(a % b)
+        return gcd_urs(b, a % b);
+    else
+        return b;
+}
+
 int main()
 {
     int a, b;
-    cin >> a >> b;
+    //cin >> a >> b;
     clock_t start, finish;
     double time;
 
     start = clock();
-    cout << gcd_1(a, b) <<"\n";
-    cout << gcd_stl(a, b) <<"\n";
-    cout << gcd_2(a, b) <<"\n";
-    cout << gcd_3(a, b) <<"\n";
+    for(int i = 1; i <= 10000000; i++)
+        int x = gcd_1(27, i);
     finish = clock();
 
     time = double(finish - start)/double(CLOCKS_PER_SEC);
     cout << time <<"\n";
+
+    start = clock();
+    for(int i = 1; i <= 10000000; i++)
+        int x = gcd_urs(27, i);
+    finish = clock();
+
+    time = double(finish - start)/double(CLOCKS_PER_SEC);
+    cout << time <<"\n";
+    /*cout << gcd_stl(a, b) <<"\n";
+    cout << gcd_2(a, b) <<"\n";
+    cout << gcd_3(a, b) <<"\n";
+    */
     return 0;
 }
